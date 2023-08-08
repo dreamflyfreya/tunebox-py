@@ -22,6 +22,8 @@ class WidgetType(Enum):
     MultiTrackSelector = 10
     # Does not render a widget.
     NoWidget = 11
+    # support select multiple files
+    # return a list of file name in full path
     FileSelector = 12
     MultiSourceAudioSelector = 13
     AudioRecorder = 14
