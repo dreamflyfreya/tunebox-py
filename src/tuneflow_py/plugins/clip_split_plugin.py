@@ -21,21 +21,21 @@ class ClipSplitPlugin(TuneflowPlugin):
     def params(song: Song) -> Dict[str, ParamDescriptor]:
         return {
             "selectedClipInfos": {
-                    "displayName": {
-                        "zh": '选中片段',
-                        "en": 'Selected Clips',
-                    },
-                    "defaultValue": None,
-                    "widget": {
-                        "type": WidgetType.NoWidget.value,
-                    },
-                    "hidden": True,
-                    "injectFrom": {
-                        "type": InjectSource.SelectedClipInfos.value,
-                        "options": {
-                            "maxNumClips": 1
-                        }
+                "displayName": {
+                    "zh": '选中片段',
+                    "en": 'Selected Clips',
+                },
+                "defaultValue": None,
+                "widget": {
+                    "type": WidgetType.NoWidget.value,
+                },
+                "hidden": True,
+                "injectFrom": {
+                    "type": InjectSource.SelectedClipInfos.value,
+                    "options": {
+                        "maxNumClips": 1
                     }
+                }
             },
             "playheadTick": {
                 "displayName": {

@@ -306,7 +306,7 @@ class Clip:
     def get_raw_note_count(self):
         return len(self._proto.notes)
 
-    def get_raw_notes(self):
+    def get_raw_notes(self) -> List[song_pb2.Note]:
         '''
         @returns All notes contained by the clip, including those that
         are not within the clip's range.
@@ -317,7 +317,7 @@ class Clip:
     def get_raw_note_at(self, index: int):
         return Note(proto=self._proto.notes[index], clip=self)
 
-    def get_notes(self):
+    def get_notes(self) -> List[Note]:
         '''
         @returns Notes within the clip's range.
         '''
@@ -327,7 +327,19 @@ class Clip:
             end_tick=self.get_clip_end_tick())
         for note_proto in note_protos:
             yield Note(proto=note_proto, clip=self)
-
+    
+    def get_notes_by_ids(self, ids: List[str]) -> List[Note]:
+        '''
+        @returns Notes within the clip's range.
+        '''
+        idsMap = {lambda x: True for x in ids}
+        note_protos = Clip._get_notes_in_range(
+            raw_notes=self._proto.notes, start_tick=self.get_clip_start_tick(),
+            end_tick=self.get_clip_end_tick())
+        for note_proto in note_protos:
+            if note_proto.id in idsMap:
+                yield Note(proto=note_proto, clip=self)
+    
     def create_note(
         self,
         pitch: int,
